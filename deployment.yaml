@@ -17,7 +17,7 @@ spec:
       - name: ghcr-secret
       containers:
       - name: app-api
-        image: ghcr.io/alexandermamaniy/kubernetes-cicd:7977ef0ce4e55802f67212ffbe67cfd78b7970d1
+        image: ghcr.io/alexandermamaniy/kubernetes-cicd:ca08514ee164ec24a0f2493e2c7d03d8fd0843e7
         ports:
         - containerPort: 3000
         resources:
