@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-api
+  template:
+    metadata:
+      labels:
+        app: app-api
+    spec:
+      imagePullSecrets:
+      - name: ghcr-secret
+      containers:
+      - name: app-api
+        image: ghcr.io/alexandermamaniy/kubernetes-cicd:7caa8ba83e57e3ebf2e09dfd9289fe24fc6658a8
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-api
+  namespace: default
+spec:
+  selector:
+    app: app-api
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: ClusterIP
