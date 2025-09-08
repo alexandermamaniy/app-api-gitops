@@ -19,7 +19,7 @@ spec:
       - name: ghcr-secret
       containers:
       - name: argocd-gitops-api
-        image: ghcr.io/alexandermamaniy/kubernetes-cicd:dc9cf6c118212ba118fc5db9ef1c3dc4ea2bcb2e
+        image: ghcr.io/alexandermamaniy/kubernetes-cicd:b0c537a27c63e67f13fd9a6e20f0c46c471e8f92
         ports:
           - containerPort: 3000
         resources:
