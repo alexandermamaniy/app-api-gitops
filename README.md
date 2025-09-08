@@ -19,23 +19,6 @@ helm install argocd argo/argo-cd --namespace argocd
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
-## ArgoCD Application
-
-```bash
-cd argocd/applications/
-```
-
-## Creating Image Pull Secrets
-
-To allow Kubernetes to pull images from GitHub Container Registry:
-
-```yaml
-kubectl create secret docker-registry ghcr-secret \\
-  --docker-server=ghcr.io \\
-  --docker-username=YOUR_USERNAME \\
-  --docker-password=YOUR_PAT \\
-  --namespace=argocd-gitops
-```
 
 ## Applying changes to ArgoCD Application
 
@@ -45,6 +28,20 @@ Verify the ArgoCD services are running and apply the application manifest
 kubectl get svc -n argocd
 kubectl apply -f argocd/applications/basic-application.yaml
 ```
+
+
+## Creating Image Pull Secrets
+
+To allow Kubernetes to pull images from GitHub Container Registry under argocd-gitops namespace :
+
+```yaml
+kubectl create secret docker-registry ghcr-secret \\
+  --docker-server=ghcr.io \\
+  --docker-username=YOUR_USERNAME \\
+  --docker-password=YOUR_PAT \\
+  --namespace=argocd-gitops
+```
+
 
 
 ## Access ArgoCD UI
