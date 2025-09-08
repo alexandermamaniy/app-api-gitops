@@ -24,17 +24,24 @@ Retrieve ArgoCD Admin Credentials:
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
+Create Namespace for Application: 
+```bash
+kubectl create namespace argocd-gitops
+```
+
+
+Create Image Pull Secret (replace YOUR_USERNAME and YOUR_PAT): 
+```bash
+kubectl create secret docker-registry ghcr-secret --docker-server=ghcr.io --docker-username=YOUR_USERNAME --docker-password=YOUR_PAT --namespace=argocd-gitops
+```
+
+
 
 Deploy the Application manifest in ArgoCD: 
 
 ```bash
 kubectl get svc -n argocd 
 kubectl apply -f argocd/applications/basic-application.yaml
-```
-
-Create Image Pull Secret (replace YOUR_USERNAME and YOUR_PAT): 
-```bash
-kubectl create secret docker-registry ghcr-secret --docker-server=ghcr.io --docker-username=YOUR_USERNAME --docker-password=YOUR_PAT --namespace=argocd-gitops
 ```
 
 
